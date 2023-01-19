@@ -7,6 +7,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PLATFORM", "PLATFORM", "{B9
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlatformService", "PlatformService\PlatformService.csproj", "{07319589-FB7A-4698-A7A6-29ADB51BF8B9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "COMMAND", "COMMAND", "{62E02DA4-3CAD-4857-9324-CECDBE30AA62}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommandService", "CommandService\CommandService.csproj", "{5450F01A-3EE4-44BB-BDEA-3308E6750F9D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "K8S", "K8S", "{79BB3347-43CD-4542-80DA-391C7D69687E}"
+	ProjectSection(SolutionItems) = preProject
+		K8S\commands-depl.yaml = K8S\commands-depl.yaml
+		K8S\ingress-srv.yaml = K8S\ingress-srv.yaml
+		K8S\platforms-depl.yaml = K8S\platforms-depl.yaml
+		K8S\platforms-np-srv.yaml = K8S\platforms-np-srv.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,12 +29,17 @@ Global
 		{07319589-FB7A-4698-A7A6-29ADB51BF8B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07319589-FB7A-4698-A7A6-29ADB51BF8B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07319589-FB7A-4698-A7A6-29ADB51BF8B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5450F01A-3EE4-44BB-BDEA-3308E6750F9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5450F01A-3EE4-44BB-BDEA-3308E6750F9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5450F01A-3EE4-44BB-BDEA-3308E6750F9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5450F01A-3EE4-44BB-BDEA-3308E6750F9D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{07319589-FB7A-4698-A7A6-29ADB51BF8B9} = {B916A5E6-D830-4218-B701-C744A9C73459}
+		{5450F01A-3EE4-44BB-BDEA-3308E6750F9D} = {62E02DA4-3CAD-4857-9324-CECDBE30AA62}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A4DC865-78E7-40EB-8512-3E09BD89243F}

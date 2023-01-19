@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using PlatformService.Data;
 using PlatformService.Dtos;
 using PlatformService.Models;
+using PlatformService.SyncDataServices.Http;
 
 namespace PlatformService.Controllers
 {
@@ -12,11 +13,17 @@ namespace PlatformService.Controllers
     {
         private IMapper _mapper;
         private IPlatformRepository _repository;
+        private readonly ICommandDataClient _dataCommandClient;
 
-        public PlatformController(IMapper mapper, IPlatformRepository repository)
+        public PlatformController(
+            IMapper mapper,
+            IPlatformRepository repository,
+            ICommandDataClient dataCommandClient
+            )
         {
             _mapper = mapper;
             _repository = repository;
+            _dataCommandClient = dataCommandClient;
         }
 
         [HttpGet]
@@ -47,13 +54,23 @@ namespace PlatformService.Controllers
         }
 
         [HttpPost]
-        public ActionResult<PlatformReadDto> GetPlatFormById([FromBody] PlatformCreateDto platformCreateDto)
+        public async Task<ActionResult<PlatformReadDto>> GetPlatFormById([FromBody] PlatformCreateDto platformCreateDto)
         {
             var platformModel = _mapper.Map<Platform>(platformCreateDto);
             _repository.CreatePlatform(platformModel);
             _repository.SaveChanges();
 
             var platformReadDto = _mapper.Map<PlatformReadDto>(platformModel);
+
+            try
+            {
+                await _dataCommandClient.SendPlatformToCommand(platformReadDto);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"--> Could not send Message to synchronousely {ex}");
+
+            }
             return CreatedAtRoute(nameof(GetPlatFormById), new { Id = platformReadDto.Id }, platformReadDto);
         }
     }
